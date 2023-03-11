@@ -1,0 +1,24 @@
+#### Código para crear variables de Tiempo para la EDER
+## El código consume el archivo EDER2017_HV (etiquetas).dta disponible en 
+
+
+eder17<- read_stata("EDER2017_HV (etiquetas).dta")
+EDER2017 <- eder17[,c("key_Per","hij_vid_1","edad_retro","edad_act","ID")]
+
+EDER2017$primhij_1 <- ifelse ((EDER2017$hij_vid_1 !=1 & EDER2017$hij_vid_1 !=2 & EDER2017$hij_vid_1 !=4 &
+                                 EDER2017$hij_vid_1 !=5 & EDER2017$hij_vid_1 !=6),1,0)
+EDER2017[order(EDER2017$key_Per, EDER2017$edad_retro),]
+EDER2017 <- EDER2017 %>%
+  group_by(key_Per) %>%
+  add_tally(wt=primhij_1, name="censura")
+  
+EDER2017$primhij_2 <- ave(EDER2017$primhij_1, EDER2017$key_Per, FUN=cumsum)
+EDER2017$primhij_3 <- ifelse((EDER2017$primhij_1 == 1 & EDER2017$primhij_2 == 1),EDER2017$edad_retro,0)
+
+EDER2017 <- EDER2017 %>%
+  group_by(key_Per) %>%
+  add_tally(wt=primhij_3)
+
+EDER2017$edad_prim_hijo <- ifelse((EDER2017$censura==1),EDER2017$n,EDER2017$edad_act)
+
+EDER2017 <- EDER2017[!duplicated(EDER2017$ID),]
