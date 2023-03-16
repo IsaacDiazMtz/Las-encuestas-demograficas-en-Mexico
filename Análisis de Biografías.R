@@ -1,13 +1,4 @@
-####################################################################################
-####################################################################################
-###                                                                              ###
-###         El impacto de la no corresidencia de los padres con los hijos        ###
-###         durante la infancia y/o adolescencia sobre la transicion a la        ###
-###                     vida adula: Un análisis multiestado                      ###
-###                             (Descriptivos)                                   ###
-###                                                                              ###
-####################################################################################
-####################################################################################
+######### Análisis biográfico de la transición a la vida adulta para adolecentes según condición de socialización (Corresidencia parental y no parental)
 
 # Librerias
 
@@ -30,8 +21,7 @@ library("actuar", lib.loc="~/R/win-library/3.5")
 
 # Elementos iniciales
 
-setwd("~/Maestria en Demografía/Metodología de la Investigación II/Metodologia/Intento 2")
-base1= read.csv("Base.R.csv",header = T)
+base1= read.csv("Base.R.csv",header = T)                                  # Esta base de datos se encuentra en la página inicial del proyecto, base de datos que tomo de referencia la EDER 2017
 
 base1=base1[base1$Año.nacimiento >= 1970 & base1$Año.nacimiento < 1990,]  # Dos Cohortes
 base1=base1[base1$IOS.3. > 0,]                                            # Missings IOS 
@@ -88,7 +78,7 @@ base1$tam_loc[base1$tam_loc == 3] = "Urbana"
 base1$tam_loc[base1$tam_loc == 4] = "Rural"
 tam_loca=factor(base1$tam_loc)
 
-##### Mecanismos
+##### Condición de socialización
 
 # Correside vs No Correside
 
@@ -111,32 +101,6 @@ base1$NC[base1$NC == 0] = "Corresidio"
 base1$NC[base1$NC == 1] = "No corresidio"
 
 corres=factor(base1$NC)
-
-# Paterna
-
-inf.1ra.p=factor(base1$prim_inf_pad)
-inf.2da.p=factor(base1$seg_inf_pad)
-inf.3ra.p=factor(base1$terc_inf_pad)
-ado.tem.p=factor(base1$adoles_temp_pad)
-ado.tar.p=factor(base1$adoles_tardia_pad)
-inf.7.pad=factor(base1$infancia.7._pad)
-inf.3.pad=factor(base1$infancia.3._pad)
-ado.3.pad=factor(base1$Adolescencia.3._pad)
-ado.2.pad=factor(base1$Adolescencia.2._pad)
-inf.ado.p=factor(base1$Infancia.y.adolescencia_pad)
-
-# Materna
-
-inf.1ra.m=factor(base1$prim_inf_mad)
-inf.2da.m=factor(base1$seg_inf_mad)
-inf.3ra.m=factor(base1$terc_inf_mad)
-ado.tem.m=factor(base1$adoles_temp_mad)
-ado.tar.m=factor(base1$adoles_tardia_mad)
-inf.7.mad=factor(base1$infancia.7._mad)
-inf.3.mad=factor(base1$infancia.3._mad)
-ado.3.mad=factor(base1$Adolescencia.3._mad)
-ado.2.mad=factor(base1$Adolescencia.2._mad)
-inf.ado.m=factor(base1$Infancia.y.adolescencia_mad)
 
 ##### Transiciones
 
