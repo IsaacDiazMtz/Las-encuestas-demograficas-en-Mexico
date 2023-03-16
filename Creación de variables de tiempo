@@ -1,5 +1,6 @@
 #### Código para crear variables de Tiempo para la EDER
-## El código consume el archivo EDER2017_HV (etiquetas).dta disponible en 
+## El código consume el archivo EDER2017_HV (etiquetas).dta 
+## disponible en https://www.inegi.org.mx/programas/eder/2017/  o  https://cedua.colmex.mx/bases-de-datos
 
 
 eder17<- read_stata("EDER2017_HV (etiquetas).dta")
